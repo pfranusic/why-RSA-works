@@ -1,0 +1,46 @@
+%%%% why-RSA-works/simple-proof.tex
+%%%% Copyright 2012 Peter Franusic.
+%%%% All rights reserved.
+%%%%
+
+We need to convince ourselves that RSA works under a broad set of conditions.
+That is, we need to demonstrate that we can start with any $m \in Z_n$,
+perform two modex operations on it, and get $m$ back.
+Here's the set of conditions:
+\begin{itemize}
+\item  two prime integers $p$ and $q$ such that $p \ne q$
+\item  the ring $\mathcal{R}_n = (Z_n,\oplus,\otimes)$ where $n=pq$
+\item  exponential notation in $\mathcal{R}_n$  (e.g. $m^3 = m \otimes m \otimes m$)
+\item  the Carmichael function value $\lambda=\lcm(p-1,q-1)$
+\item  two integers $e$ and $d$ such that $ed=k\lambda + 1$
+\item  an integer $m$ such that $m \in Z_n$
+\end{itemize}
+
+Refer to the RSA cryptosystem of Figure \ref{block-diagram}.
+The message $m$ is presented at the input of Bob's transmitter.
+The message $y$ is produced at the output of Alice's receiver.
+We will demonstrate that $y=m$.
+
+The receiver output equation (\ref{eq:rx-out}) states that $y=c^d$.
+This is what we begin our proof with.
+In the following steps, we will modify the right side of this equation.
+\[  y = c^d  \]
+
+The transmitter output equation (\ref{eq:tx-out}) states that $c=m^e$.
+We replace $c$ in the equation above with $(m^e)$.
+\[  y = (m^e)^d  \]
+
+The exponent multiplication rule (\ref{eq:expo-mult}) states that $(m^e)^d=m^{ed}$.
+We replace $(m^e)^d$ in the equation above with $m^{ed}$.
+\[  y = m^{ed}  \]
+
+The multiple-plus-one condition (\ref{eq:inv-pair}) states that $ed=k\lambda + 1$.
+We replace $ed$ in the equation above with $k\lambda + 1$.
+\[  y = m^{k\lambda + 1}  \]
+
+The Carmichael identity (\ref{eq:carm-id}) states that $m=m^{k\lambda + 1}$.
+We replace $m^{k\lambda + 1}$ in the equation above with $m$.
+\[  y = m  \]
+
+QED
+

@@ -1,0 +1,46 @@
+%%%% why-RSA-works/oplus-operator.tex
+%%%% Copyright 2012 Peter Franusic.
+%%%% All rights reserved.
+%%%%
+
+When $n$ is small, the $\oplus$ operator can be specified using a table.
+Table \ref{oplus-15} specifies the $\oplus$ operator for the ring $\mathcal{R}_{15}$.
+The table is a 15 by 15 block of integers.  There are 15 rows and 15 columns.
+Recall that rows run left and right, columns run up and down.
+Row numbers are specified by the extra column along the left side of the block.  
+Column numbers are specified by the extra row along the top of the block.
+Note the diagonal stripe pattern that is visible in the table.
+
+\vspace{2ex}
+%%%% oplus-15 table
+\begin{table}[!ht]
+  \begin{center}
+    \input{oplus-15.tex}
+    \caption{$a \oplus b \quad (\mathcal{R}_{15})$}
+    \label{oplus-15}
+  \end{center}
+\end{table}
+
+Table \ref{oplus-15} specifies the value of $a \oplus b$ for every possible pair of $a$ and $b$.
+For example, let $a=10$ and $b=12$.
+The value of $10 \oplus 12$ is specified at the intersection of row $10$ and column $12$.
+This value is $7$.  Therefore $10 \oplus 12 = 7$.
+
+Notice that every element in the table is in the set $Z_{15}$.
+This demonstrates the \emph{additive closure} property of rings.
+The additive closure property states that for every pair of elements $a$ and $b$ in $Z_n$,
+the sum $a \oplus b$ is also an element in $Z_n$.
+\[ a \oplus b \in Z_n \]
+
+The value of $a \oplus b$ can also be specified using a rule.
+To compute $10 \oplus 12$ we first calculate $10 + 12$ to get 22.
+Since 22 is not an element in $Z_{15}$ we subtract the modulus 15, i.e. $22 - 15 = 7$.
+Since $7 \in Z_{15}$ we stop and 7 is our final result.
+
+In general, the $\oplus$ operator takes two integers $a$ and $b$, 
+adds them together using normal addition, 
+then subtracts some multiple of $n$ such that the final value is in $Z_n$.
+The term $kn$ signifies some multiple of $n$. That is, $kn=0n,1n,2n,3n,\ldots$
+We simply use whichever $kn$ works in order to get closure, where $a \oplus b \in Z_n$.
+\[  a \oplus b = a + b - kn  \]
+

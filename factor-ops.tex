@@ -1,0 +1,88 @@
+%%%% why-RSA-works/factor-ops.tex
+%%%% Copyright 2012 Peter Franusic.
+%%%% All rights reserved.
+%%%%
+%% This is LaTeX source code for a figure that contains four curves.
+%% The curves are specified by LaTeX and Lisp expressions shown below.
+%% The labels of the curves are TD, QS, NFS, and Shor.
+%% TD = Trial Division factoring algorithm.
+%% QS = Quadratic Sieve factoring algorithm.
+%% NFS = Number Field Sieve factoring algorithm.
+%% Shor = Peter Shor's factoring algorithm for quantum computers.
+%% The curves are overlayed on a 64 by 30 grid pattern.
+%% The x-axis has lines every 4 grids, with labels {128,256,384,...,1204}.
+%% The y-axis has lines every 3 grids, with labels {6,12,18,24,30}.
+%%
+%% In the Lisp code below, the expt function will accept integer exponents
+%% greater than 128 but not floating-point exponents.
+%% E.g., (expt 2 129) returns 680564733841876926926749214863536422912,
+%% but (expt 2 129.0) causes an error message to be printed.
+%% 
+%% TD curve:
+%%   $y = \log \left( \sqrt{2^x} \right)$
+%%   (setf y (log (sqrt (expt 2 x)) 10))
+%% 
+%% QS curve:
+%%   $y = \log \left( e^{\left( \left( \ln \; 2^{x} \right)^{\frac{1}{2}}\; \cdot \; 
+%%        \left( \ln \; \left( \ln \; 2^{x} \right) \right)^{\frac{1}{2}} \right)} \right)$
+%%   (setf y (log (exp (* (expt (log (expt 2 x)) 1/2) (expt (log (log (expt 2 x))) 1/2))) 10))
+%% 
+%% NFS curve:
+%%   $y = \log \left( e^{\left( \left( \ln \; 2^{x} \right)^{\frac{1}{3}}\; \cdot \; 
+%%        \left( \ln \; \left( \ln \; 2^{x} \right) \right)^{\frac{2}{3}} \right)} \right)$
+%%   (setf y (log (exp (* (expt (log (expt 2 x)) 1/3) (expt (log (log (expt 2 x))) 2/3))) 10))
+%% 
+%% Shor curve:
+%%   $y = \log \left( \left( \ln \left( 2^{x} \right) \right)^{3} \right)$
+%%   (setf y (log (expt (log (expt 2 x)) 3) 10))
+%% 
+
+\setlength{\unitlength}{1.6mm}
+\begin{picture}(64,30) 
+\linethickness{0.075mm} 
+
+%% grid pattern
+%% \multiput (x,y) (dx,dy) {n} {object}
+\multiput (0,0) (8,0) {9} {\line(0,1){30}} % x divisions
+\multiput (0,0) (0,6) {6} {\line(1,0){64}} % y divisions
+
+%% y-axis labels
+%% 6 12 18 24 30 
+\put (-2.5, 29.5){\scriptsize\textsf{30}}
+\put (-2.5, 23.5){\scriptsize\textsf{24}}
+\put (-2.5, 17.5){\scriptsize\textsf{18}}
+\put (-2.5, 11.5){\scriptsize\textsf{12}}
+\put (-2.2,  5.5){\scriptsize\textsf{ 6}}
+
+%% x-axis labels
+%% 128 256 384 512 640 768 896 1024
+\put( 6.8,-2.0){\scriptsize\textsf{128}}
+\put(14.8,-2.0){\scriptsize\textsf{256}}
+\put(22.8,-2.0){\scriptsize\textsf{384}}
+\put(30.8,-2.0){\scriptsize\textsf{512}}
+\put(38.8,-2.0){\scriptsize\textsf{640}}
+\put(46.8,-2.0){\scriptsize\textsf{768}}
+\put(54.8,-2.0){\scriptsize\textsf{896}}
+\put(62.0,-2.0){\scriptsize\textsf{1024}}
+
+\thicklines
+
+%% TD curve
+%% \qbezier (start-x,start-y) (pull-x,pull-y) (stop-x,stop-y)
+\put (7.0, 26.0) {\textsf{TD}}
+\qbezier (0.00, 0.00) (6.25, 15.00) (12.50, 30.00)
+
+%% QS curve
+\put (42.5, 25.0) {\textsf{QS}}
+\qbezier (0.00, 0.00) (7.00, 15.00) (64.00,29.65)
+
+% NFS curve
+\put (50.0, 13.25) {\textsf{NFS}}
+\qbezier (0.00,0.00) (5.50, 9.00) (64.00,13.58)
+
+%% Shor curve
+\put (51.0, 9.25) {\textsf{Shor}}
+\qbezier (0.00,0.00) ( 0.50,4.50) ( 8.00,5.84)
+\qbezier (8.00,5.84) (24.00,8.00) (64.00,8.55)
+
+\end{picture}

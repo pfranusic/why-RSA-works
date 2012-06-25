@@ -1,0 +1,46 @@
+%%%% why-RSA-works/exponential-tables.tex
+%%%% Copyright 2012 Peter Franusic.
+%%%% All rights reserved.
+%%%%
+
+%% Define an exponential product and give an example.
+We now take a closer look at exponential products $m^a$ in the ring $\mathcal{R}_n$.
+When $n$ is very small we can compute exponential products by hand.
+As an example we compute $7^3$ in the ring $\mathcal{R}_{15}$ using Table \ref{otimes-15}.
+\[  7^3 \quad = \quad 7 \otimes 7 \otimes 7 \quad = \quad (7 \otimes 7) \otimes 7 \quad 
+= \quad 4 \otimes 7 \quad = \quad 13  \]
+
+%% Define an exponential table and give an example.
+We can go on to calculate the exponential product 
+of each pair of elements in $Z_{15}$ and put them all in a table.
+Table \ref{modex-15} specifies the exponential products $m^a$ in the ring $\mathcal{R}_{15}$.
+The product of $7^3$ is at the intersection of row 7 and column 3.
+\vspace{2ex}
+%%%% modex table
+\begin{table}[!h]
+  \begin{center}
+    \input{modex-15.tex}
+    \caption{$m^a \quad (\mathcal{R}_{15})$}
+    \label{modex-15}
+  \end{center}
+\end{table}
+
+%% Define a cycle and point out examples in the table.
+Now consider the product sequence in row 3 (shown below).
+Notice how the sequence starts at 1 and then repeats itself.
+The shortest repetitive part of a sequence is called a \emph{cycle}.
+The cycle in row 3 is (3, 9, 12, 6).
+The \emph{period} of this cycle is 4.
+\[ 1 \quad \overbrace{3 \quad 9 \quad 12 \quad 6}
+     \quad \overbrace{3 \quad 9 \quad 12 \quad 6} \quad \cdots \]
+
+%% Define an identity column and point out examples in the table.
+Each row in Table \ref{modex-15} is a sequence that starts with 1 followed by a series of cycles.
+Each cycle in the various rows has a period of either 1 or 2 or 4.
+Remarkably, all of the cycles line up vertically in such a way
+as to provide what may be called \emph{identity columns}.
+Consider columns 1, 5, 9, and 13.  These are the identity columns in the table.
+Each is identical to the row number column on the left side of the table.
+So for any $m \in Z_{15}$ we have
+\[  m^1 =  m^5  =  m^9  =  m^{13}  \]
+

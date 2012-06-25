@@ -1,0 +1,59 @@
+%%%% why-RSA-works/multiple-plus-one.tex
+%%%% Copyright 2012 Peter Franusic.
+%%%% All rights reserved.
+%%%%
+
+RSA uses two integers as exponents.
+One is the encryptor $e$ and the other is the decryptor $d$.
+In order for RSA to work, the product $ed$ must satisfy a strict condition.
+The condition is that the product $ed$ must have a \emph{multiple-plus-one} form.
+The product must be able to be written in the form $k\lambda+1$.
+The reason for this condition will become apparent later.
+For now, however, we need to understand what the expression $k\lambda+1$ means.
+
+%% This paragraph shall introduce Table \ref{mult-plus-one} below.
+Table \ref{mult-plus-one} contains some examples of multiple-plus-one products.
+Each product ends in 001.
+Each product is a multiple of 1000, plus one.
+In the first example, the product 174001 is equal to $174 \cdot 1000 + 1$.
+
+\vspace{2ex}
+%%%% multiple-plus-one table
+\begin{table}[!ht]
+  \begin{small}
+    \input{mult-plus-one.tex}
+  \end{small}
+  \caption{Multiples of 1000, plus one}
+  \label{mult-plus-one}
+\end{table}
+\vspace{2ex}
+
+%% This paragraph shall introduce $\lambda$.
+The Greek letter $\lambda$ (pronounced \textsf{LAM duh})
+is specified in the RSA literature.\cite{RSA-standard}
+We use $\lambda$ here as an integer constant.
+It typically has a huge value, almost as large as modulus $n$.
+In the context of Table \ref{mult-plus-one} it has a small value, $\lambda=1000$.
+The products can therefore be written like this:
+\begin{eqnarray*}
+  911 \cdot 191  &=&  174 \lambda + 1 \\
+  913 \cdot 977  &=&  892 \lambda + 1 \\
+  917 \cdot 253  &=&  232 \lambda + 1 \\
+  & \vdots &
+\end{eqnarray*}
+
+%% This paragraph shall explain that $k$ is some unspecified positive integer.
+The products in the table can be written in the form $k\lambda+1$.
+The symbol $k$ signifies some positive integer.
+Its value is not important.
+The term $k\lambda$ simply means \emph{some integer multiple of $\lambda$}.
+This meaning of $k$ allows the multiple-plus-one condition to be stated succinctly.
+
+%% This paragraph shall formally state the condition.
+\paragraph{Multiple-plus-one condition:}
+Given positive integers $e$, $d$, and $\lambda$,
+the product $ed$ shall be an integer multiple of $\lambda$, plus one.
+\begin{equation} \label{eq:inv-pair}
+  ed = k\lambda + 1
+\end{equation}
+

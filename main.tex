@@ -1,0 +1,121 @@
+%%%% why-RSA-works/main.tex
+%%%% Copyright 2012 Peter Franusic.
+%%%% All rights reserved.
+%%%%
+
+\documentclass{article}
+%\pagestyle{empty}
+
+%%%% Various environments
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{latexsym}
+\usepackage{amssymb}
+
+%%%% Easy-vision mode
+\usepackage[usenames]{color}
+\pagecolor{black}
+\color{green}
+
+%%%% math-mode commands
+\newcommand{\lcm}{\mathrm{lcm}}
+
+%%%% PDF metadata
+\pdfinfo
+{ /Title (Why RSA Works)
+  /Author (Peter Franusic)
+  /Subject (Rivest-Shamir-Adleman algorithm)
+  /Keywords (RSA, Carmichael, public-key, cryptography)
+}
+
+%%%% European-style paragraphs
+%%%% IMPORTANT: \begin{document} must follow for this to work.
+\setlength{\parindent}{0pt} 
+\setlength{\parskip}{1.3ex} 
+
+%%%% Title block
+\title{\textbf{\huge{Why RSA Works}}}
+\author{Peter Franu\v si\'c
+  \footnote{
+    Copyright 2012 Peter Franu\v si\'c.
+    All rights reserved.
+    Email: \texttt{pete@sargo.com}}}
+\date{}
+
+\begin{document}
+
+%% Title page
+\maketitle
+\thispagestyle{empty}
+\vspace{8ex}
+\input{intro.tex}
+
+\newpage
+\section{Huge integers}
+\input{huge-integers.tex}
+
+\newpage
+\section{Simulation}
+\input{simulation.tex}
+
+\newpage
+\section{Rings}
+\input{rings.tex}
+
+\section{The set $Z_n$}
+\input{set-Zn.tex}
+
+\newpage
+\section{The $\oplus$ operator}
+\input{oplus-operator.tex}
+
+\newpage
+\section{The $\otimes$ operator}
+\input{otimes-operator.tex}
+
+\newpage
+\section{Exponential notation}
+\input{exponential-notation.tex}
+
+\newpage
+\section{The modex function}
+\input{modex-function.tex}
+
+\newpage
+\section{Exponent arithmetic}
+\input{exponent-arithmetic.tex}
+
+\newpage
+\section{Multiple-plus-one}
+\input{multiple-plus-one.tex}
+
+\newpage
+\section{Exponential tables}
+\input{exponential-tables.tex}
+
+\newpage
+\section{Wallpaper}
+\input{wallpaper.tex}
+
+\newpage
+\section{Mappings}
+\input{mappings.tex}
+
+\newpage
+\section{A simple proof}
+\input{simple-proof.tex}
+
+\newpage
+\section{Hard problems}
+\input{hard-problems.tex}
+
+\newpage
+\section{Conclusions}
+\input{conclusions.tex}
+
+\newpage
+%%%% References
+\input{references.tex}
+
+\end{document}
+

@@ -1,0 +1,56 @@
+%%%% why-RSA-works/exponent-arithmetic.tex
+%%%% Copyright 2012 Peter Franusic.
+%%%% All rights reserved.
+%%%%
+
+RSA uses exponential notation in the ring $\mathcal{R}_n$.
+Exponential notation is simply a mathematical shorthand for writing 
+a series of multiplications using the $\otimes$ operator.
+The multiplicative association property allows us to derive 
+two rules for doing arithmetic with exponents.
+
+Consider the set of three equations below.
+The left side of the first equation is the expression $m^2 \otimes m^3$.
+We can replace the $m^2$ with $(m \otimes m)$.
+We can also replace the $m^3$ with $(m \otimes m \otimes m)$.
+The right side of the first equation shows this.
+The multiplicative association property says that we can 
+ignore the parentheses and simply count the number of $m$'s that are multiplied.
+There are 5 and we show this in the second equation.
+Note that 5 is the sum of 2 plus 3.
+So instead of expanding the expression $m^2 \otimes m^3$
+we can simply add 2 and 3, as shown in the third equation.
+\begin{eqnarray*}
+  m^2 \otimes m^3 &=&  (m \otimes m) \otimes (m \otimes m \otimes m)  \\
+  &=&  m^5  \\
+  &=&  m^{2 + 3}
+\end{eqnarray*}
+
+\paragraph{Exponent addition rule:}  In general, when we have an expression of the form 
+$m^e \otimes m^d$ in the ring $\mathcal{R}_n$ we can simply add the exponents.
+\[  m^e \otimes m^d  =  m^{e + d}  \]
+
+Consider the set of four equations below.
+The left side of the first equation is the expression $(m^2)^3$.
+This means three copies of $m^2$ are multiplied using the $\otimes$ operator.
+The right side of the first equation shows this.
+In the second equation, we replace each $m^2$ with $(m \otimes m)$.
+The multiplicative association property says that we can 
+ignore the parentheses and simply count the number of $m$'s that are multiplied.
+There are 6 and we show this in the third equation.
+Note that 6 is the product of 2 times 3.
+Instead of expanding the expression $(m^2)^3$
+we can simply multiply 2 and 3, as shown in the fourth equation.
+\begin{eqnarray*}
+  (m^2)^3  &=&  m^2 \otimes m^2 \otimes m^2  \\
+  &=&  (m \otimes m) \otimes (m \otimes m) \otimes (m \otimes m)  \\
+  &=&  m^6 \\
+  &=&  m^{2 \times 3}
+\end{eqnarray*}
+
+\paragraph{Exponent multiplication rule:}  In general, when we have an expression of the form 
+$(m^e)^d$ in the ring $\mathcal{R}_n$ we can simply multiply the exponents.
+\begin{equation} \label{eq:expo-mult}
+  (m^e)^d  =  m^{ed} 
+\end{equation}
+

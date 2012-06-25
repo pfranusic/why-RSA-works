@@ -1,0 +1,98 @@
+%%%% why-RSA-works/wallpaper.tex
+%%%% Copyright 2012 Peter Franusic.
+%%%% All rights reserved.
+%%%%
+
+%%%% The goal here is to introduce the Carmichael identity.
+%%%% We look at a modex table where a visible pattern is readily apparent.
+%%%% We define the Carmichael function value and set forth the wallpaper theorem
+%%%% and the Carmichael identity.
+
+%% Introduce the modex-33 table and point out the wallpaper pattern.
+We now consider a larger exponentiation table.
+Table \ref{modex-33} specifies exponential products $m^a$ in the ring $\mathcal{R}_{33}$.
+The table is small enough to fit on a page 
+yet big enough for us to visually perceive a \emph{wallpaper} pattern.
+There appear to be three identical strips of wallpaper side by side.
+Each strip is 10 columns wide and runs from top to bottom.
+
+%% modex-33 table
+\begin{table}[!h]
+\hspace{-9ex}
+  \input{modex-33.tex}
+  \caption{$m^a \quad (\mathcal{R}_{33})$}
+  \label{modex-33}
+\end{table}
+
+%% Develop the equation that describes the pattern.
+Notice that this table also contains identity columns.
+They are columns 1, 11, 21, and 31.
+Also notice that column 2 is the same as columns 12 and 22, 
+column 3 is the same as columns 13 and 23, and so on.
+In fact, the entire block of columns 1 through 10 is repeated in columns 11 through 20,
+and this block pattern continues to repeat for columns beyond 20.
+
+\newpage
+
+We can easily represent this wallpaper pattern with an equation.
+Any column $a$ is the same as column $10+a$ and column $20+a$ and so on.
+We use the notation $k \cdot 10$ to denote some multiple of 10.
+So for any $m \in Z_{33}$ and any integer $a > 0$ we have
+\[  m^a = m^{k \cdot 10 + a}  \]
+
+%% Define the Carmichael function value and give the equation.
+Each row in Table \ref{modex-33} is a sequence of exponential products.
+Each sequence is a 1 followed by a series of cycles.
+These cycles have various periods.
+For this table the periods are 1, 2, 5, and 10.
+The period of the longest cycle is symbolized by $\lambda$.
+This is also known as the \emph{Carmichael function value}.
+For this particular exponential table we have $\lambda=10$.
+However, for any two distinct primes $p$ and $q$,
+it turns out that the Carmichael function value $\lambda$ 
+is the \emph{least common multiple} of $p-1$ and $q-1$.
+\[  \lambda = \lcm(p-1,q-1)  \]
+
+%% Describe how to compute an lcm and give an example.
+When $p$ and $q$ are small we can compute the Carmichael function value by hand.
+For example, let $p=11$ and $q=13$ so that $\lambda=\lcm(10,12)$.
+The multiples of 10 are 10, 20, 30, etc.
+The multiples of 12 are 12, 24, 36, etc.
+The multiples that are common to both are 60, 120, 180, etc.
+The least of these is 60.
+\begin{center}
+\begin{tabular}{lcl}
+  Multiples of 10 &=& 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, \ldots \\
+  Multiples of 12 &=& 12, 24, 36, 48, 60, 72, 84, 96, 108, 120, 132, \ldots \\
+  Common to both &=& 60, 120, 180, \ldots \\
+  $\lcm(10,12)$ &=& 60
+\end{tabular}
+\end{center}
+
+%% Substitute the 10 with $\lambda$.
+We described the wallpaper pattern of Table \ref{modex-33} 
+using the equation $m^a=m^{k \cdot 10 + a}$.  We can replace the 10 with $\lambda$.
+This gives us $m^a=m^{k\lambda + a}$.
+This equation holds for primes $p=3$ and $q=11$.
+But does it hold for \emph{any} pair of primes?
+We assert that it does and we offer the following theorem without proof.
+
+\paragraph{Wallpaper theorem:}
+Given two distinct primes $p$ and $q$, the ring $\mathcal{R}_{pq}$,
+the Carmichael function value $\lambda=\lcm(p-1,q-1)$, 
+any $m \in Z_{pq}$, any integer $a > 0$, and any integer $k \ge 0$, then
+\[  m^a = m^{k\lambda + a}  \]
+
+RSA uses a special case of the Wallpaper theorem where $a=1$.
+We call this special case the \emph{Carmichael identity}.
+The $m^a$ on the left side is replaced by $m$, since $m^1=m$.
+The $m^{k\lambda + a}$ on the right side is replaced by $m^{k\lambda + 1}$.
+
+\paragraph{Carmichael identity:}
+Given two distinct primes $p$ and $q$, the ring $\mathcal{R}_{pq}$,
+the Carmichael function value $\lambda=\lcm(p-1,q-1)$, 
+any $m \in Z_{pq}$, and any integer $k \ge 0$, then
+\begin{equation} \label{eq:carm-id}
+  m = m^{k\lambda + 1}
+\end{equation}
+

@@ -1,0 +1,61 @@
+%%%% why-RSA-works/simulation.tex
+%%%% Copyright 2012 Peter Franusic.
+%%%% All rights reserved.
+%%%%
+
+We can simulate RSA messaging using a Lisp interpreter.
+Our version of Lisp uses a question mark for the prompt.
+Lisp commands may be variable names or compound expressions.
+The interpreter reads each command, evaluates it, and prints the result.
+
+Alice must precompute three integers before Bob can send her RSA encrypted messages.
+These are \mbox{modulus $n$}, \mbox{encryptor $e$}, and \mbox{decryptor $d$}.
+Some examples have been precomputed and are displayed below in decimal format.
+Note that \mbox{modulus $n$} has 56 decimal digits.  This turns out to be 186 bits.
+A typical RSA modulus has at least 1024 bits, but we use 186 bits here for the sake of brevity.
+\begin{quote}
+\begin{verbatim}
+? n
+97397795163266888271167242107545263613895906874319587249
+? e
+10306926753200670273346978999454444249925952109333797079
+? d
+46445936998769783647957439537275126296124161350172130481
+\end{verbatim}
+\end{quote}
+
+A typical RSA message is an AES-128 session key.
+This is a random 128-bit integer used by the AES algorithm to encrypt a high bandwidth session.
+Here $m$ has 39 decimal digits, or 128 bits.
+Normally $m$ would be padded with extra random bits to make it about the same size as $n$,
+but we've omitted padding steps in this demonstration for the sake of clarity.
+\begin{quote}
+\begin{verbatim}
+? m
+325004947599823818213341565111207349415
+\end{verbatim}
+\end{quote}
+
+Bob commands his Lisp interpreter to compute \mbox{ciphertext $c$}.
+Lisp computes the modex function with inputs $m$, $e$, $n$, 
+assigns this value to the variable $c$, then prints the result.
+Note that, whereas $m$ has only 39 digis, \mbox{ciphertext $c$} has 56 digits,
+the same as $n$.
+\begin{quote}
+\begin{verbatim}
+? (setf c (modex m e n))
+65406940630722215589598713946252700262213080283568050086
+\end{verbatim}
+\end{quote}
+
+Alice commands her Lisp interpreter to compute \mbox{output $y$}.
+Lisp computes the modex function with inputs $c$, $d$, $n$, 
+assigns this value to the variable $y$, then prints the result.
+Note that $y$ is identical to $m$. \emph{Magic!}
+\begin{quote}
+\begin{verbatim}
+? (setf y (modex c d n))
+325004947599823818213341565111207349415
+\end{verbatim}
+\end{quote}
+

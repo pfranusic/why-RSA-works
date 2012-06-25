@@ -1,0 +1,31 @@
+%%%% why-RSA-works/set-Zn.tex
+%%%% Copyright 2012 Peter Franusic.
+%%%% All rights reserved.
+%%%%
+
+A finite set $Z_n$ can be specified in several different ways.
+When a set has just a few elements, they can be explicitly enumerated, listed within curly brackets.
+For example, the set $Z_{15}$ consists of the 15 integers starting with 0 and ending with 14.
+\[  Z_{15} = \{0,1,2,3,4,5,6,7,8,9,10,11,12,13,14\}  \]
+
+When a set has a huge number of elements, they cannot be enumerated.
+But if a set consists entirely of sequential elements, it can be specified
+by listing the first few elements, an ellipsis, and the last few elements.
+For example, the set $Z_n$ consists of a sequence of $n$ integers,
+starting with 0 and ending with $(n-1)$.
+\[  Z_n = \{0,1,2,3,\ldots,(n-2),(n-1)\}  \]
+
+When RSA generates a pair of keys, it selects some modulus $n$ 
+that is the product of two distinct primes $p$ and $q$.
+The term \emph{product} means that we multiply $p$ times $q$.
+Instead of writing $p \times q$ we use the abbreviation $pq$.
+\[  n = pq  \]
+
+The term \emph{distinct} means that $p$ and $q$ are different from each other.
+That is, $p \ne q$.
+Recall that a \emph{prime} is any integer greater than 1
+that cannot be divided evenly by any other integer except 1 and itself.
+The first five primes are 2, 3, 5, 7, and 11.
+In the example of $Z_{15}$ above, the modulus $15$ is 
+the product of the two distinct primes $3$ and $5$.
+

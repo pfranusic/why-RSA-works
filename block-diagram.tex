@@ -1,0 +1,85 @@
+%%%% why-RSA-works/block-diagram.tex
+%%%% Copyright 2012 Peter Franusic.
+%%%% All rights reserved.
+%%%%
+%%
+%%     2         3         4         5         6         7
+%% 6789012345678901234567890123456789012345678901234567890123456
+%%             Alice's                Alice's
+%%            public key            private key
+%%           {---------}            {---------}
+%%            n       e              n       d
+%%            |       |              |       |
+%%            |       |              |       |
+%%            |       |              |       |
+%%         +-------------+        +-------------+
+%%    m    |             |   c    |             |   y
+%% --------|    m # x    |--------|    m # x'   |--------
+%%         |             |        |             |
+%%         +-------------+        +-------------+
+%%
+%%                    An RSA cryptosystem
+
+% graphic macro definitions
+
+\setlength{\unitlength}{0.05in} % for pictures
+\newsavebox{\bigblock}
+\savebox{\bigblock}(16,12)[bl]{
+  \put( 0,  0){\line(1,0){16}}
+  \put( 0, 12){\line(1,0){16}}
+  \put( 0,  0){\line(0,1){12}}
+  \put(16,  0){\line(0,1){12}}}
+\newsavebox{\smallblock}
+\savebox{\smallblock}(9,12)[bl]{
+  \put( 0,  0){\line(1,0){ 9}}
+  \put( 0, 12){\line(1,0){ 9}}
+  \put( 0,  0){\line(0,1){12}}
+  \put( 9,  0){\line(0,1){12}}}
+
+% The block diagram
+\begin{picture}(90,45)(0,0)
+% Box around picture
+%\put(  0.0,  0.0){\line(1,0){90}}
+%\put(  0.0, 42.0){\line(1,0){90}}
+%\put(  0.0,  0.0){\line(0,1){42}}
+%\put( 90.0,  0.0){\line(0,1){42}}
+% Transmitter
+\put( 18.0, 37.0){\textsf{Alice's}}
+\put( 16.2, 34.0){\textsf{public key}}
+\put( 16.8, 28.0){$\overbrace{\phantom{XXXX}}$}
+\put( 14.0, 11.0){\usebox{\bigblock}}
+\put( 18.0, 16.5){\large{\texttt{modex}}}
+\put(  8.0, 18.0){$m$}
+\put(  6.0, 17.0){\vector(1,0){8}}
+\put( 17.3, 27.0){$n$}
+\put( 18.0, 26.0){\vector(0,-1){3}}
+\put( 25.3, 27.0){$e$}
+\put( 26.0, 26.0){\vector(0,-1){3}}
+\put( 33.5, 18.0){$c$}
+\put( 15.5,  7.0){\textsf{transmitter}}
+\put( 18.8,  4.0){\textsf{(Bob)}}
+% Channel
+\put( 30.0, 17.0){\vector(1,0){28}}
+\put( 39.0, 37.0){\textsf{insecure}}
+\put( 39.0, 34.0){\textsf{channel}}
+\put( 36.4, 28.0){$\overbrace{\phantom{XXXXXX}}$}
+\put( 44.0, 17.0){\circle{2}}
+\put( 44.0, 16.0){\line(0,-1){5.5}}
+\put( 40.5,  7.0){\textsf{sniffer}}
+\put( 41.0,  4.0){\textsf{(Eve)}}
+% Receiver
+\put( 62.0, 37.0){\textsf{Alice's}}
+\put( 59.7, 34.0){\textsf{private key}}
+\put( 60.8, 28.0){$\overbrace{\phantom{XXXX}}$}
+\put( 58.0, 11.0){\usebox{\bigblock}}
+\put( 62.0, 16.5){\large{\texttt{modex}}}
+\put( 53.0, 18.0){$c$}
+\put( 61.3, 27.0){$n$}
+\put( 62.0, 26.0){\vector(0,-1){3}}
+\put( 69.3, 27.0){$d$}
+\put( 70.0, 26.0){\vector(0,-1){3}}
+\put( 76.5, 18.0){$y$}
+\put( 74.0, 17.0){\vector(1,0){8}}
+\put( 62.0,  7.0){\textsf{receiver}}
+\put( 62.5,  4.0){\textsf{(Alice)}}
+\end{picture}

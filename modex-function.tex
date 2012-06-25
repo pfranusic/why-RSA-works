@@ -1,0 +1,60 @@
+%%%% why-RSA-works/modex-function.tex
+%%%% Copyright 2012 Peter Franusic.
+%%%% All rights reserved.
+%%%%
+
+The term \emph{modex} is a contraction of modular exponentiation.
+The modex function performs exponentiation in the ring $\mathcal{R}_n$.
+It performs the equivalent of a series of $\otimes$ operations.
+
+The RSA cryptosystem in Figure \ref{block-diagram} uses two modex functions: 
+one in the transmitter and the other in the receiver.
+Both modex functions have three inputs and one output.
+We specify the output equation for each.
+
+\paragraph{Receiver output equation:}
+The receiver's modex function takes the inputs $c,n,d$ and computes the output $y$.
+The modex output $y$ is the equivalent of $d$ copies of $c$ multiplied together using 
+the $\otimes$ operator in the ring $\mathcal{R}_n$.
+\begin{equation} \label{eq:rx-out}
+  y = c^d
+\end{equation}
+
+\paragraph{Transmitter output equation:}
+The transmitter takes the inputs $m,n,e$ and computes the output $c$.
+The modex output $c$ is the equivalent of $e$ copies of $m$ multiplied together using 
+the $\otimes$ operator in the ring $\mathcal{R}_n$.
+\begin{equation} \label{eq:tx-out}
+  c = m^e 
+\end{equation}
+
+\vspace{4ex}
+
+The modex function doesn't actually multiply $e$ copies of $m$ in order to compute $m^e$.
+This would take eons for huge values of $e$.
+Instead, modex actually uses a method called \emph{square-and-multiply}.
+A register $r$ is first initialized to $m$.
+Then it's repeatedly squared $(r \otimes r)$ and multiplied $(r \otimes m)$
+depending on the number of bits in $e$ and the value of each bit.
+For example, if $e$ is 1024 bits long, there'll be 1023 squares and about 512 multiplies.
+A lot less than $2^{1024}$ multiplies.
+
+The modex function uses the $\otimes$ operator in the ring $\mathcal{R}_n$.
+Recall that the $\otimes$ operator takes two integers, multiplies them,
+then subtracts some multiple of $n$ so that the result is in $Z_n$.
+That is, $a \otimes b = ab - kn$.
+The subtraction step is called \emph{reduction} and may be implemented
+by taking the remainder of a division.
+The product $ab$ is divided by $n$, the quotient is $k$, and the remainder is $ab-kn$.
+But division is time consuming, and
+most modex implementations do not use division for the reduction step.
+Instead, they use a faster method called \emph{Montgomery reduction},
+which replaces slow divisions with fast truncations.
+
+The modex function can be very time-consuming to compute.
+Square-and-multiply and Montgomery reduction are two \emph{speed-ups}
+that are used to shorten the compute time.  There are others.
+The enumeration and details of these speed-ups are outside the scope of this paper,
+but they are well-documented in the literature.
+\cite{Koc}\cite{Schneier}\cite{HAC}
+

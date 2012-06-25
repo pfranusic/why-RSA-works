@@ -1,0 +1,49 @@
+%%%% why-RSA-works/exponential-notation.tex
+%%%% Copyright 2012 Peter Franusic.
+%%%% All rights reserved.
+%%%%
+
+Let's say we're given three elements $a,b,c$ which are members of the set $Z_n$.
+We're also given the expression $a \otimes b \otimes c$.
+The question is this:  How do we compute this expression?
+Do we first multiply $a$ and $b$ and then multiply $c$?
+Or do we multiply $b$ and $c$ and then multiply $a$?
+The answer is that either way is correct.
+It doesn't matter what order we multiply the elements.
+This is because the ring $\mathcal{R}_n$ has the property of \emph{multiplicative association}.
+The multiplicative association property says that
+when we have a series of $\otimes$ operations,
+we can do the operations in whatever order we want.
+The answer will be the same.
+\begin{eqnarray*}
+  a \otimes b \otimes c  &=&  (a \otimes b) \otimes c \\
+                         &=&  a \otimes (b \otimes c)
+\end{eqnarray*}
+
+The modex function is represented mathematically using \emph{exponential notation}.
+Exponential notation is an efficient way to describe a series of multiplications of the same value.
+For example, the value $m$ can be multiplied by itself any number of times.
+We use exponential notation to describe this.
+Remember that it doesn't matter in what order the $m$'s are multiplied together.
+\begin{eqnarray*}
+  \overbrace{m}^1  &=&  m^1  \\
+  \overbrace{m \otimes m}^2  &=&  m^2  \\
+  \overbrace{m \otimes m \otimes m}^3 &=&  m^3  \\
+  \overbrace{m \otimes m \otimes m \otimes m}^4 &=&  m^4  \\
+  &\vdots&
+\end{eqnarray*}
+
+RSA uses the exponential notation $m^e$.
+The value $m$ is the \emph{message} integer.
+The value $e$ is the \emph{encryptor} exponent.
+The exponential notation $m^e$ means that $e$ copies of $m$ are multiplied together
+using the $\otimes$ operator in the ring $\mathcal{R}_n$.
+\[ m^e \quad = \quad \overbrace{m \otimes m \otimes m \, \cdots \otimes m \otimes m}^e \]
+
+RSA also uses the exponential notation $c^d$.
+The value $c$ is the \emph{ciphertext} integer.
+The value $d$ is the \emph{decryptor} exponent.
+The exponential notation $c^d$ means that $d$ copies of $c$ are multiplied together
+using the $\otimes$ operator in the ring $\mathcal{R}_n$.
+\[ c^d \quad = \quad \overbrace{c \otimes c \otimes c \, \cdots \otimes c \otimes c}^d \]
+

@@ -1,0 +1,26 @@
+%%%% why-RSA-works/rings.tex
+%%%% Copyright 2012 Peter Franusic.
+%%%% All rights reserved.
+%%%%
+
+RSA uses mathematical structures called rings.
+A \emph{ring} is a set equipped with two binary operators.\cite{wiki-Rings}
+The ring displays several well-defined algebraic properties,
+including both additive closure and multiplicative closure.
+
+Recall that a set is simply a collection of elements.
+These elements can be anything, but in the case of RSA, the elements are integers.
+RSA uses sets with a finite number of elements.
+The number of elements in a set is called the \emph{modulus}.
+The modulus is represented by the symbol $n$.
+
+A binary operator is something that takes two elements and computes a third.
+Rings use two binary operators, which we denote here as
+$\oplus$ (pronounced \textsf{OH plus}) and $\otimes$ (pronounced \textsf{OH times}).
+The $\oplus$ operator is similar to addition.
+The $\otimes$ operator is similar to multiplication.
+
+In general, we say that the ring  $\mathcal{R}_n$
+consists of the set $Z_n$, the $\oplus$ operator, and the $\otimes$ operator.
+\[  \mathcal{R}_n = (Z_n,\oplus,\otimes)  \]
+

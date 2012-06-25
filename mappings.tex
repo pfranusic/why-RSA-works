@@ -1,0 +1,107 @@
+%%%% why-RSA-works/mappings.tex
+%%%% Copyright 2012 Peter Franusic.
+%%%% All rights reserved.
+%%%%
+
+%% The goal of this section is to present RSA encryption and decrypttion as two mappings
+%% and try to explain why this works.
+%% Leverage the modex-33 table to provide a concrete example.
+%% Perhaps offer a theorem which asserts: If $e$ is relatively prime to $\lambda$, 
+%% then column $e$ will contain all elements of $Z_n$.
+
+%% Introduce the two mappings $m \to m^3$ and $c \to c^7$.
+RSA encryption maps an integer $m$ to an integer $m^e$.
+Likewise, RSA decryption maps an integer $c$ to an integer $c^d$.
+This is demonstrated in Table \ref{modex-33-cols}, where $e=3$ and $d=7$.
+In the encryption procedure,
+every element in the $m$ column maps to a unique element in the $m^3$ column.
+And in the decryption procedure,
+every element in the $c$ column maps to a unique element in the $c^7$ column.
+
+%%%% modex-33 columns and arrows
+\begin{table}[!h]
+  \begin{center}
+    \input{modex-33-cols.tex}
+    \caption{$m \to c \to y \quad (\mathcal{R}_{33})$}
+    \label{modex-33-cols}
+  \end{center}
+\end{table}
+\input{modex-33-arrows.tex}
+
+% Give an example of $m \to y$.
+The table also illustrates an example.
+First $m=13$ is mapped to $m^3=19$ which then becomes $c$.
+Subsequently $c=19$ is mapped to $c^7=13$ which then becomes $y$.
+The final result, $y=13$, is identical to the original, $m=13$.
+This is how RSA works, no matter which $m$ one starts with, no matter how large $n$ is.
+The final $y$ will always be identical to the original $m$.
+
+%% Here's a question we haven't really answered:
+%% Why are the elements in columns $e$ and $d$ arranged the way they are?
+%% We know that $(m^e)^d=m$ for all $m$ by way of the proof.
+%% But how did the elements in columns $e$ and $d$ get in the right order?
+
+\newpage
+
+%% Point out that some $c=m$.
+Some of the values in column $m$ are the same as their corresponding value in $m^3$.
+For example, $10 \to 10$.  There are 9 of these, out of a total of 33.
+That means that 28 percent of the ciphertexts are identical to their plaintext messages.
+This would be unacceptable, of course,
+except that the percentage is infinitesimal for huge values of $n$.
+
+%% Point out that each column contains every element in $Z_n$.
+Columns $m^3$ and $c^7$ each contain every element in $Z_{33}$.
+This is a requirement in order to make the two mappings work, so that $y=m$,
+Every element in $m$ needs to map to a unique element in $m^3$,
+and every element in $c$ must map to a unique element in $c^7$.
+If this were not the case,
+if some element in $Z_{33}$ was not in column $m^3$,
+or if some element in $Z_{33}$ was in column $m^3$ more than once,
+then RSA would not work for every $m$ in $Z_{33}$.
+
+%% Point out that some columns \emph{do not} contain every element,
+%% and that neither column number shares a prime factor with $\lambda$.
+Refer again to Table \ref{modex-33} in the Wallpaper section.
+Many of the columns do not contain every element in $Z_{33}$.
+These are columns 0, 2, 4, 5, 6, 8, 10, 12, 14, 15, 16, 18, 20, 22, 24, 25, 26, 28, 30, and 32.
+That's 20 out of 33 columns, or 61 percent.
+In each of these columns, some elements of $Z_{33}$ are missing and some appear more than once.
+For example, the element 1 appears more that once in each of these columns.
+
+It turns out that for each of these columns (except column 0),
+the column number shares a prime factor with $\lambda=10$.
+The prime factors of 10 are 2 and 5.
+So if a column number is a multiple of 2 or a multiple of 5,
+the column itself won't contain every element in $Z_{33}$.
+Notice that neither 3 nor 7 shares a prime factor with $\lambda$.
+
+%% Define the greatest common divisor function and give an example.
+We can use the \emph{greatest common divisor} function ($\gcd$)
+to determine if two integers share a prime factor.
+When the two integers are small we can compute the greatest common divisor by hand.
+As an example we compute the gcd of 6468 and 7560 by hand.
+First we list the prime factors of 6468 and the prime factors of 7560.
+Then we list the prime factors that are common to both.
+Finally, we compute the product of these common factors.
+This gives us the gcd.
+\begin{center}
+\begin{tabular}{lcl}
+  Factors of 6468   &=&  $2 \cdot 2 \cdot 3 \cdot 7 \cdot 7 \cdot 11$ \\
+  Factors of 7560   &=&  $2 \cdot 2 \cdot 2 \cdot 3 \cdot 3 \cdot 3 \cdot 5 \cdot 7$ \\
+  Common to both    &=&  $2 \cdot 2 \cdot 3 \cdot 7$ \\
+  $\gcd(6468,7560)$ &=&  84
+\end{tabular}
+\end{center}
+
+Most implementations of the gcd function return 1 if no prime factors are shared.
+Therefore, if the $\gcd$ function returns anything greater than 1,
+we are assured that the two numbers share one or more prime factors.
+RSA uses the $\gcd$ function during key generation
+in order to select an encryptor $e$ that shares no prime factors with $\lambda$.
+
+%% Point out that this pair of column numbers meets the multiples-plus-one condition.
+%% Finally, we note that $e=3$ and $d=7$ meet the multiples-plus-one condition.
+%% That is, $ed=k\lambda+1$ where $\lambda=10$.
+%% \[  ed = (3)(7) = 21 = 2 \cdot 10 + 1  \]
+

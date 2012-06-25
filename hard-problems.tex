@@ -1,0 +1,57 @@
+%%%% why-RSA-works/hard-problems.tex
+%%%% Copyright 2012 Peter Franusic.
+%%%% All rights reserved.
+%%%%
+
+%%%% Note that RSA trades the problem of key distribution for different problems
+%%%% that are considered \emph{hard}.
+
+The security of RSA is based on several hard problems.
+The most prominent of these is \emph{integer factorization}.
+The problem is to write an algorithm that computes the prime factors of some huge integer $n$
+and does it using a small number of computing operations.
+An algorithm is ``fast'' if it requires only a few operations to complete the solution.
+It is a hard problem to write an algorithm that is fast enough 
+to factor a 1024-bit RSA modulus within any reasonable amount of time.
+
+Four factoring algorithms are graphed in Figure \ref{factor-ops}.
+They are, from slowest to fastest: Trial Division (TD), the Quadratic Sieve (QS),
+the Number Field Sieve (NFS), and Peter Shor's algorithm for quantum computers.\cite{Shor}
+The graph plots the number of operations required to factor some modulus $n$.
+For example, it will take roughly $10^{12}$ operations 
+to factor a 768-bit modulus using the NFS algorithm.
+This is about 1500 years on a single core 2.2 GHz AMD Opteron processor with 2 GB RAM.\cite{RSA-768}
+%%%% Trial Division (TD): $\mathcal{O}(\sqrt{N})$ operations.
+%%%% Quadratic Sieve (QS): $\mathcal{O}(e^{(\ln N)^{1/2}(\ln (\ln N))^{1/2}})$ operations.
+%%%% Number Field Sieve (NFS): $\mathcal{O}(e^{(\ln N)^{1/3}(\ln (\ln N))^{2/3}})$ operations.
+%%%% Quantum algorithm (Shor): $\mathcal{O}((\ln N)^3)$ operations.
+
+%%%% Graph of factoring times
+%%%% Present three graphs: TD, QS, NFS.
+%%%% Bits on linear scale, operations on log scale.
+
+\begin{figure}[h]
+\vspace{4ex}
+\begin{center}
+\input{factor-ops.tex}
+\vspace{2ex}
+\caption{$\log_{10}$ operations per $\log_2 n$}
+\label{factor-ops}
+\end{center}
+\end{figure}
+
+An RSA cryptosystem can be broken if the modulus can be factored.
+That is, if Eve can factor $n$ into $p$ and $q$, she can easily compute $d$.
+She first computes the Carmichael function value $\lambda=\lcm(p-1,q-1)$.
+Then she computes $d$ such that $ed=k\lambda + 1$.
+Trouble is, factoring a huge integer takes a \emph{very} long time.
+
+Eve can try to solve the RSA problem\cite{RSA-problem} and 
+compute the $e^{th}$ root of $m^e$,
+i.e., compute $m = \sqrt[e]{m^e}$.
+But computing roots takes just as long as factoring.
+There are other algorithms that can theoretically break RSA
+but they're all just as slow as integer factorization.
+The point is that Eve will not be able break an RSA cryptosystem with a huge modulus 
+in any reasonable amount of time.
+

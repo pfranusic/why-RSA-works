@@ -1,0 +1,30 @@
+%%%% why-RSA-works/conclusions.tex
+%%%% Copyright 2012 Peter Franusic.
+%%%% All rights reserved.
+%%%%
+
+So why does RSA work?
+Why is it that we can take some message $m$,
+run it through two modex operations, and come out with the same $m$?
+There are several reasons.
+First of all, RSA computations are done in a commutative ring
+and the multiplicative association property holds in commutative rings.
+This property tells us that 
+the two exponentiations $(m^e)^d$ are the same as the one exponentiation $m^{ed}$.
+
+A second reason is that exponents $e$ and $d$ are chosen
+such that they satisfy the multiples-plus-one condition $ed = k\lambda + 1$.
+This insures that $ed$ is one of the identity columns
+in the exponential table of ring $\mathcal{R}_n$.
+
+A third reason is that the exponential table contains 
+repeating blocks of columns where $m^a=m^{k\lambda+a}$.
+This is the wallpaper pattern that we saw in Table \ref{modex-33}.
+This pattern is the reason for the multiples-plus-one condition.
+
+Finally, RSA works because it relies on the intractability of the factoring problem.
+A huge RSA modulus $n$ cannot be factored expeditiously.
+Given that $n$ is the product of two distinct huge random primes,
+it is virtually impossible to factor $n$ in any reasonable amount of time,
+even if the factoring effort is distributed across thousands of computers.
+

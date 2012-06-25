@@ -1,0 +1,17 @@
+# why-RSA-works/README
+# Copyright 2012 Peter Franusic.
+# All rights reserved.
+#
+
+This directory contains LaTeX source files for an article titled "Why RSA Works".
+The article describes the math behind the RSA algorithm.
+The makefile script assumes that the pdflatex program is installed.
+
+To generate a PDF of the article:
+
+  $ make why-RSA-works.pdf
+
+To generate a tarfile of the sources:
+
+  $ make why-RSA-works.tar
+

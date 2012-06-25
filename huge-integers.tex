@@ -1,0 +1,52 @@
+%%%% why-RSA-works/huge-integers.tex
+%%%% Copyright 2012 Peter Franusic.
+%%%% All rights reserved.
+%%%%
+
+Figure \ref{block-diagram} shows an RSA cryptosystem.
+It consists of a transmitter, a receiver, and a sniffer in between.
+Tradition has it that \emph{Bob} is the transmitter, \emph{Alice} is the receiver,
+and \emph{Eve} is the sniffer. (\emph{Eavesdropper}, get it?)
+The twin engines of the system are the modular exponentiation (modex) functions.
+
+RSA uses \emph{huge} integers.
+By huge we mean integers with over 300 decimal digits.
+It would take over four lines to print a 300 digit integer on this page.
+Happily, we can represent huge integers with single letters.
+Each of the letters in the figure represents a huge integer.
+These are: \mbox{message $m$}, \mbox{modulus $n$}, \mbox{encryptor $e$}, 
+\mbox{ciphertext $c$}, \mbox{decryptor $d$}, and \mbox{output $y$}.
+
+%%%% Figure: Block diagram
+\vspace{-3ex}
+\begin{figure}[h]
+\begin{center}
+\input{block-diagram.tex}
+\caption{An RSA cryptosystem}
+\label{block-diagram}
+\end{center}
+\end{figure}
+
+Bob generates encrypted messages and transmits them to Alice.
+He originates \mbox{message $m$},
+computes the modex function using \mbox{modulus $n$} and \mbox{encryptor $e$},
+then writes \mbox{ciphertext $c$} into the insecure channel.
+The public \mbox{key $(n,e)$} was generated and published by Alice 
+prior to any transmission by Bob.
+
+Alice receives encrypted messages from Bob and decrypts them.
+She reads \mbox{ciphertext $c$} from the insecure channel,
+computes the modex function using \mbox{modulus $n$} and \mbox{decryptor $d$},
+then writes \mbox{output $y$}.
+The magic of RSA is that \mbox{output $y$} is identical to \mbox{message $m$}.
+I.e., \mbox{$y=m$}.
+Alice generated and secured her private \mbox{key $(n,d)$} prior to 
+receiving any ciphertext from Bob.
+
+Eve is the threat that exists on every insecure channel.
+She attempts to read messages that are meant to be read only by Alice.
+But Eve is defeated by RSA encryption.
+She can intercept ciphertext $c$ but she won't be able to compute $y$
+because she doesn't have access to decryptor $d$.
+Only Alice has access to decryptor $d$.
+

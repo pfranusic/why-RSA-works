@@ -1,0 +1,47 @@
+%%%% why-RSA-works/otimes-operator.tex
+%%%% Copyright 2012 Peter Franusic.
+%%%% All rights reserved.
+%%%%
+
+When $n$ is small, the $\otimes$ operator can be specified using a table.
+Table \ref{otimes-15} specifies the $\otimes$ operator for the ring $\mathcal{R}_{15}$.
+The format is the same as Table \ref{oplus-15}.  The values, of course, are different.
+Note the rose-like pattern visible in the table.
+The table is symmetrical about the diagonals.
+If we ignore column 0, then
+row 1 is the reverse of row 14, row 2 is the reverse of row 13, etc.
+
+\vspace{2ex}
+%%%% otimes-15 table
+\begin{table}[!ht]
+  \begin{center}
+    \input{otimes-15.tex}
+    \caption{$a \otimes b \quad (\mathcal{R}_{15})$}
+    \label{otimes-15}
+  \end{center}
+\end{table}
+
+Table \ref{otimes-15} specifies the value of $a \otimes b$ for every possible pair of $a$ and $b$.
+For example, let $a=11$ and $b=8$.
+The value of $11 \otimes 8$ is specified at the intersection of row $11$ and column $8$.
+This value is $13$.  Therefore $11 \otimes 8 = 13$.
+
+Notice that every element in the table is in the set $Z_{15}$.
+This demonstrates the \emph{multiplicative closure} property of rings.
+The multiplicative closure property states that for every pair of elements $a$ and $b$ in $Z_n$,
+the product $a \otimes b$ is also an element in $Z_n$.
+\[ a \otimes b \in Z_n \]
+
+The value of $a \otimes b$ can also be specified using a rule.
+To compute $11 \otimes 8$ we first calculate $11 \times 8$ to get 88.
+Since 88 is not an element in $Z_{15}$ we subtract a multiple of the modulus, $kn$.
+In this case, $kn = 5 \times 15 = 75$.  Therefore $88 - 75 = 13$.
+And $13 \in Z_{15}$ so 13 is our final result.
+
+In general, the $\otimes$ operator takes two integers $a$ and $b$, 
+multiplies them together using normal multiplication, 
+then subtracts some multiple of $n$ such that the final value is in $Z_n$.
+In other words, we subtract whichever $kn$ works in order to get closure, 
+where $a \otimes b \in Z_n$.
+\[  a \otimes b = ab - kn  \]
+
